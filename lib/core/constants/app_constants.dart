@@ -36,6 +36,16 @@ class AppConstants {
     '6x ao dia': 4,
   };
 
+  // Lista de frequências disponíveis
+  static const List<String> frequenciasPredefinidas = [
+    '1x ao dia',
+    '2x ao dia',
+    '3x ao dia',
+    '4x ao dia',
+    '6x ao dia',
+    'customizada',
+  ];
+
   // Mensagens
   static const String appName = 'Lembrete de Medicamentos';
   static const String appVersion = '1.0.0';

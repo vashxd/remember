@@ -12,6 +12,8 @@ import 'package:provider/provider.dart';
 import '../../../data/models/models.dart';
 import '../../providers/medicamento_provider.dart';
 import '../../components/molecules/molecules.dart';
+import '../settings/settings_page.dart';
+import '../medicamento/adicionar_medicamento_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -177,14 +179,18 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _adicionarMedicamento() {
-    // TODO: Navegar para tela de adicionar medicamento
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Tela de adicionar medicamento em desenvolvimento'),
-        duration: Duration(seconds: 2),
+  Future<void> _adicionarMedicamento() async {
+    final resultado = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const AdicionarMedicamentoPage(),
       ),
     );
+
+    // Recarrega lista se medicamento foi adicionado
+    if (resultado == true && mounted) {
+      context.read<MedicamentoProvider>().carregarMedicamentos();
+    }
   }
 
   void _abrirDetalhesMedicamento(Medicamento medicamento) {
@@ -254,10 +260,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _abrirConfiguracoes() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Configurações em desenvolvimento'),
-      ),
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const SettingsPage()),
     );
   }
 }
